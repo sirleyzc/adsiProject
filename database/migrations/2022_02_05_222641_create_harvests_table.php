@@ -16,6 +16,7 @@ class CreateHarvestsTable extends Migration
         Schema::create('harvests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('idEmployee')->constrained('Employees');
+            $table->foreignId('idUser')->constrained('Users');
             $table->date('datHarvest');
             $table->decimal('dayValue', 8, 2);
             $table->timestamps();

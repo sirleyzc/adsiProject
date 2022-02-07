@@ -3,8 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class CustomerController extends Controller
 {
-    //
+    //Create
+    public function store(Request $request) {
+        $customer = new Customer();
+        $customer->name = $request->name;
+        $customer->address = $request->address;
+        $customer->phone = $request->phone;
+
+        $customer->save();
+    }
+
+    //Read
+    public function index(){
+        $customer = Customer::all();
+        return [
+            'cus' => $customer
+        ];
+    }
+
+    //Update
+    public function update(Request $request) {
+        $customer = Customer::findOrFail($request->id);
+        $customer->name = $request->name;
+        $customer->address = $request->address;
+        $customer->phone = $request->phone;
+
+        $customer->save();
+    }
+
+    //Delete
+    public function destroy(Request $request) {
+        $customer = Customer::findOrFail($request->id);
+        $customer->delete();
+    }
 }
