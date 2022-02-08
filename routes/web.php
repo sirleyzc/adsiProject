@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,7 @@ Route::get('/api/customer', [CustomerController::class, 'index']);
 Route::post('/api/customer/register', [CustomerController::class, 'store']);
 Route::put('/api/customer/update', [CustomerController::class, 'update']);
 Route::delete('/api/customer/delete', [CustomerController::class, 'destroy']);
+
+// Payment Routes
+Route::get('/api/payment', [PaymentController::class, 'index']);
+Route::post('/api/payment/register', [PaymentController::class, 'store']);
