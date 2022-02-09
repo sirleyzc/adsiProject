@@ -18,7 +18,7 @@ class CreateDetOrdersTable extends Migration
             $table->foreignId('idOrder')->constrained('orders');
             $table->integer('amount');
             $table->string('variety');
-            $table->decimal('loadValue', 8, 2);
+            $table->decimal('loadValue', 10, 2);
             $table->string('description', 200);
             $table->timestamps();
         });

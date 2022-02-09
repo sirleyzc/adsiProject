@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\HarvestController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +48,9 @@ Route::delete('/api/customer/delete', [CustomerController::class, 'destroy']);
 // Payment Routes
 Route::get('/api/payment', [PaymentController::class, 'index']);
 Route::post('/api/payment/register', [PaymentController::class, 'store']);
+
+// Harvest Routes
+Route::post('/api/harvest/register', [HarvestController::class, 'store']);
+
+// Order Routes
+Route::post('/api/order/register', [OrderController::class, 'store']);

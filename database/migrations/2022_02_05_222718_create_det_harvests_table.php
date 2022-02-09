@@ -15,11 +15,11 @@ class CreateDetHarvestsTable extends Migration
     {
         Schema::create('det_harvests', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('idHarvest')->constrained('harvests');
             $table->char('timHarvest', 1);
             $table->integer('kilos');
-            $table->decimal('timValue', 8, 2);
+            $table->decimal('timValue', 10, 2);
+            $table->timestamps();
         });
     }
 

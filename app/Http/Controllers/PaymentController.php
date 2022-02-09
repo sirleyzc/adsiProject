@@ -10,7 +10,7 @@ class PaymentController extends Controller
     //Create
     public function store(Request $request) {
         $payment = new Payment();
-        $payment->idEmplo = $request->idEmp;
+        $payment->idEmp = $request->idEmp;
         $payment->payValue = $request->value;
         $payment->payDate = $request->date;
 
@@ -19,7 +19,7 @@ class PaymentController extends Controller
 
     //Read
     public function index() {
-        $payment = Payment::join('employees','payments.idEmplo','=','employees.id')
+        $payment = Payment::join('employees','payments.idEmp','=','employees.id')
         ->select('employees.namEmployee as emp','payments.payValue', 'payments.payDate')
         ->get();
         return [

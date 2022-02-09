@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('idCustomer')->constrained('customers');
             $table->date('orDate');
-            $table->decimal('totOrder', 8, 2);
+            $table->decimal('totOrder', 10, 2);
             $table->timestamps();
         });
     }

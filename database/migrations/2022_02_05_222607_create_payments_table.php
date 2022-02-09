@@ -15,8 +15,8 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idEmplo')->constrained('employees');
-            $table->decimal('payValue', 8, 2);
+            $table->foreignId('idEmp')->constrained('employees');
+            $table->decimal('payValue', 10, 2);
             $table->date('payDate');
             $table->timestamps();
         });
