@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 class EmployeeController extends Controller
 {
-    //Read
+    //Render view
     public function index() {
         $employee = Employee::all();
         /* return [

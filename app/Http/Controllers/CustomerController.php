@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use Inertia\Inertia;
 
 class CustomerController extends Controller
 {
@@ -13,16 +14,24 @@ class CustomerController extends Controller
         $customer->name = $request->name;
         $customer->address = $request->address;
         $customer->phone = $request->phone;
+        $customer->edo = $request->edo;
 
         $customer->save();
+    }
+
+    //IndexData
+    public function indexData() {
+        $customer = Customer::all();
+        return [
+            'cus'=>$customer
+        ];
     }
 
     //Read
     public function index(){
         $customer = Customer::all();
-        return [
-            'cus' => $customer
-        ];
+        return Inertia::render(
+            'Customer', ['cus' => $customer]);
     }
 
     //Update

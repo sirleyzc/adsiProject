@@ -21,10 +21,16 @@
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    Inicio
                                 </jet-nav-link>
                                 <jet-nav-link :href="route('employee')" :active="route().current('employee')">
                                     Empleado
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('customer')" :active="route().current('customer')">
+                                    Cliente
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('payment')" :active="route().current('payment')">
+                                    Pagos
                                 </jet-nav-link>
                             </div>
                         </div>
