@@ -19,6 +19,7 @@ class CreateHarvestsTable extends Migration
             $table->foreignId('idUser')->constrained('Users');
             $table->date('datHarvest');
             $table->decimal('dayValue', 10, 2);
+            $table->char('edo', 1);
             $table->timestamps();
         });
     }

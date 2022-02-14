@@ -4,11 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use Inertia\Inertia;
 
 class EmployeeController extends Controller
 {
     //Read
     public function index() {
+        $employee = Employee::all();
+        /* return [
+            'emp'=>$employee
+        ]; */
+        return Inertia::render('Employee', ['emp' => $employee]);
+    }
+
+    //IndexData
+    public function indexData() {
         $employee = Employee::all();
         return [
             'emp'=>$employee
@@ -23,6 +33,7 @@ class EmployeeController extends Controller
         $employee->phone = $request->phone;
         $employee->address = $request->address;
         $employee->datAdmission = $request->datAdmission;
+        $employee->edo = $request->edo;
 
         $employee->save();
     }

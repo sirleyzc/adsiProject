@@ -20,6 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->string('phone',20);
             $table->string('address',150);
             $table->date('datAdmission');
+            $table->char('edo', 1);
             $table->timestamps();
         });
     }

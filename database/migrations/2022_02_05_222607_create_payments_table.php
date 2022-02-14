@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->foreignId('idEmp')->constrained('employees');
             $table->decimal('payValue', 10, 2);
             $table->date('payDate');
+            $table->char('edo', 1);
             $table->timestamps();
         });
     }
