@@ -7,6 +7,7 @@ use App\Models\detHarvest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Inertia\Inertia;
 
 class HarvestController extends Controller
 {
@@ -42,5 +43,28 @@ class HarvestController extends Controller
             DB:rollback();
             console.log($e);
         }
+    }
+
+    //
+    public function index(){
+        $harvest= Harvest::all();
+        return inertia::render(
+            'Harvest', ['harv'=>$harvest]
+        );
+    }
+
+    public function update(Request $request){
+        $harvest= Harvest:: findOrFail($request->id);
+        $harvest->idEmp = $request->idEmp;
+        $harvest->idUser = $request->idUser;
+        $harvest->datHarvest = $request->date;
+        $harvest->datValue = $request->value;
+
+        $harvest->save();
+    }
+
+    public function destroy(Request $request){
+        $harvest= Harvest:: findOrFail($request->id);
+        $harvest-> delete();
     }
 }

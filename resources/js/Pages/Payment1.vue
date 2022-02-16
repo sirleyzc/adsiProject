@@ -1,15 +1,10 @@
 <template>
-    <app-layout title="Employee">
-        <!-- <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Empleado
-            </h2>
-        </template> -->
+    <app-layout title="Payment">
 
         <div v-if="tpAction == 0" class="py-8">
             <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex lg:justify-between border-b-2 border-gray-500 pb-1 pt-5">
-                    <h2 class="text-2xl text-gray-600 font-bold">Empleados</h2>
+                <div class="flex lg:justify-between border-b-2 border-gray-700 pb-1 pt-5">
+                    <h2 class="text-2xl text-gray-600 font-bold">Pagos</h2>
                     <div class="text-center flex-auto">
                     <input
                         type="text"
@@ -26,7 +21,7 @@
                     </div>
 
                     <div class="mb-4">
-                    <button @click="openEmp"
+                    <button @click="openPay"
                         type="button"
                         class="flex w-fit bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-600 hover:to-emerald-600 
                         focus:outline-none text-white text-xl uppercase font-bold shadow-md rounded-lg mx-auto p-2"
@@ -68,42 +63,36 @@
                     <div class="col-span-12">
                         <div class="overflow-auto lg:overflow-visible">
                             <table class="table text-white border-separate space-y-6 text-sm">
-                                <thead class="bg-emerald-500 text-white">
+                                <thead class="bg-emerald-600 text-white">
                                     <tr>
-                                        <th class="p-3">ID</th>
-                                        <th class="p-3 text-left">Nombre</th>
-                                        <th class="p-3 text-left">Teléfono</th>
-                                        <th class="p-3 text-left">Dirección</th>
-                                        <th class="p-3 text-left">Fecha de ingreso</th>
+                                        <th class="p-3">Id. Empleado</th>
+                                        <th class="p-3 text-left">Valor</th>
+                                        <th class="p-3 text-left">Fecha</th>
                                         <th class="p-3 text-left">Estado</th>
                                         <th class="p-3 text-left">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(object, index) in arrayData" :key="index" class="bg-emerald-500">
-                                        <td class="p-3">{{ object.idEmployee }}</td>
-                                        <td class="p-3">{{ object.namEmployee }}</td>
-                                        <td class="p-3">{{ object.phone }}</td>
-                                        <td class="p-3">{{ object.address }}</td>
-                                        <td class="p-3">{{ object.datAdmission }}</td>
-                                        <td v-if="object.edo == 0" class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-3">
+                                        <td class="p-3">{{ object.idEmp }}</td>
+                                        <td class="p-3">{{ object.payValue }}</td>
+                                        <td class="p-3">{{ object.payDate }}</td>
+                                        <td v-if="object.edo == 0" class="p-3">
                                             <i class="fas fa-circle text-red-400 mr-2"></i>Inactivo
                                         </td>
-                                        <td v-else class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-3">
+                                        <td v-else class="p-3">
                                             <i class="fas fa-circle text-green-400 mr-2"></i>Activo
                                         </td>
-                                        <!-- <td class="p-3">
-                                                <span class="bg-green-400 text-gray-50 rounded-md px-2">available</span>
-                                            </td> -->
+                                        <!-- border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap -->
                                         <td class="p-3">
                                             <a href="#" class="text-emerald-50 hover:text-emerald-800 mr-2">
-                                                <i @click="visEmp" class="material-icons-outlined text-base" title="Ver">visibility</i>
+                                                <i @click="visPay" class="material-icons-outlined text-base" title="Ver">visibility</i>
                                             </a>
                                             <a href="#" class="text-emerald-50 hover:text-emerald-800 mx-2">
-                                                <i @click="editEmp(object)" class="material-icons-outlined text-base" title="Actualizar">edit</i>
+                                                <i @click="editPay(object)" class="material-icons-outlined text-base" title="Actualizar">edit</i>
                                             </a>
                                             <a href="#" class="text-emerald-50 hover:text-emerald-800 ml-2">
-                                                <i @click="delEmp(object)" class="material-icons-round text-base" title="Eliminar">delete_outline</i>
+                                                <i @click="delPay(object)" class="material-icons-round text-base" title="Eliminar">delete_outline</i>
                                             </a>
                                         </td>
                                     </tr>
@@ -123,29 +112,26 @@
                                 <div class="card bg-emerald-400 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
                                 <div class="card bg-gray-400 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div>
                                 <div class="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
-                                    <label v-text="title" for="" class="block mt-3 text-lg text-gray-700 text-center font-semibold">
+                                    <label v-text="title" for="" class="block mt-3 text-lg text-gray-600 text-center font-semibold">
                                     
                                     </label>
                                     <form method="#" action="#" class="mt-10">
                                                     
-                                        <div>
-                                            <input v-model="idEmp" type="text" placeholder="Identificación" class="mt-1 block w-full border-none bg-emerald-50 h-11 rounded-xl shadow-lg hover:bg-green-100 focus:bg-green-100 focus:ring-0">
-                                        </div>
-                            
                                         <div class="mt-7">                
-                                            <input v-model="name" type="text" placeholder="Nombre Completo" class="mt-1 block w-full border-none bg-emerald-50 h-11 rounded-xl shadow-lg hover:bg-green-100 focus:bg-green-100 focus:ring-0">                           
+                                            <input v-model="idEmployee" type="text" placeholder="Identificación del empleado" class="mt-1 block w-full border-none bg-emerald-50 h-11 rounded-xl shadow-lg hover:bg-green-100 focus:bg-green-100 focus:ring-0">                           
                                         </div>
 
-                                         <div class="mt-7">                
-                                            <input v-model="phone" type="text" placeholder="Teléfono" class="mt-1 block w-full border-none bg-emerald-50 h-11 rounded-xl shadow-lg hover:bg-green-100 focus:bg-green-100 focus:ring-0">                           
+                                        <select class="w-full  h-12 text-gray-700  rounded select-none bg-white hover:border-gray-400 focus:outline-none appearance-none" name="employee" v-model="idEmployee">
+                                            <option value="" selected disabled>Selecciona un Empleado</option>
+                                            <option v-for="objeto in arrayEmp" :key="objeto.id" :value="objeto.id">{{objeto.namEmployee }}</option>
+                                        </select> 
+
+                                        <div class="mt-7">                
+                                            <input v-model="value" type="text" placeholder="Valor a pagar" class="mt-1 block w-full border-none bg-emerald-50 h-11 rounded-xl shadow-lg hover:bg-green-100 focus:bg-green-100 focus:ring-0">                           
                                         </div>
 
-                                         <div class="mt-7">                
-                                            <input v-model="address" type="text" placeholder="Dirección" class="mt-1 block w-full border-none bg-emerald-50 h-11 rounded-xl shadow-lg hover:bg-green-100 focus:bg-green-100 focus:ring-0">                           
-                                        </div>
-
-                                         <div class="mt-7">                
-                                            <input v-model="date" type="date" placeholder="Fecha de ingreso" class="mt-1 block w-full border-none bg-emerald-100 h-11 rounded-xl shadow-lg hover:bg-green-100 focus:bg-green-100 focus:ring-0">                           
+                                        <div class="mt-7">                
+                                            <input v-model="date" type="date" placeholder="Fecha" class="mt-1 block w-full border-none bg-emerald-50 h-11 rounded-xl shadow-lg hover:bg-green-100 focus:bg-green-100 focus:ring-0">                           
                                         </div>
 
                                         <div class="mt-7 flex">
@@ -158,10 +144,10 @@
                                         </div>
                                                                 
                                         <div class="mt-7">
-                                            <button v-if="button == false" @click="regEmp" class="bg-emerald-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                                            <button v-if="button == false" @click="regPay" class="bg-emerald-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                                                 Guardar
                                             </button>
-                                            <button v-else @click="updEmp" class="bg-emerald-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                                            <button v-else @click="updPay" class="bg-emerald-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                                                 Actualizar
                                             </button>
                                         </div>                                        
@@ -180,24 +166,24 @@
         </div>
         <div v-if="tpAction==2">
             <!-- component -->
-            <div class="flex flex-col space-y-4 min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-gray-900">
-            <div class="flex flex-col p-8 bg-gray-800 shadow-md hover:shodow-lg rounded-2xl">
+            <div class="flex flex-col space-y-4 min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-emerald-50">
+            <div class="flex flex-col p-8 bg-emerald-500 shadow-md hover:shodow-lg rounded-2xl">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-16 h-16 rounded-2xl p-3 border border-gray-800 text-blue-400 bg-gray-900" fill="none"
+                            class="w-16 h-16 rounded-2xl p-3 border border-emerald-500 text-cyan-400 bg-emerald-600" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         <div class="flex flex-col ml-3">
-                            <div class="font-medium leading-none text-gray-100">¿Deseas eliminar el empleado {{nameEmp}}?</div>
-                            <p class="text-sm text-gray-500 leading-none mt-1">Recuerda que este proceso no es reversible
+                            <div class="font-medium leading-none text-white">¿Deseas eliminar este registro {{nameCustom}}?</div>
+                            <p class="text-sm text-white leading-none mt-1">Recuerda que este proceso no es reversible
                             </p>
                         </div>
                     </div>
-                    <button @click="destroyEmp" class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Si</button>
-                    <button @click="close" class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">No</button>
+                    <button @click="destroyCustom" class="flex-no-shrink bg-emerald-900 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-emerald-900 text-white rounded-full">Si</button>
+                    <button @click="close" class="flex-no-shrink bg-emerald-900 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-emerald-900 text-white rounded-full">No</button>
 
                 </div>
             </div>
@@ -223,62 +209,71 @@ export default defineComponent({
             id: 0,
             title: "",
             idEmp: "",
-            name: "",
-            nameEmp: "",
-            phone: "",
-            address: "",
+            idEmployee: "",
+            nameCust: "",
+            value: "",
             date: "",
             edo: "",
             arrayData: [],
+            arrayEmp: [],
             button: true,
         }
     },
 
-    //props: ["emp"],
 
     methods: {
 
         listData() {
             let me = this;
-            var url = "/api/employee/data";
+            var url = "/api/payment/data";
 
             axios
             .get(url)
             .then(function (response) {
                 var answer = response.data;
-                me.arrayData = answer.emp;
+                me.arrayData = answer.pay;
             })
             .catch(function (error) {
                 console.log(error);
             });
         },
 
-        openEmp() {
-            this.title = "Registrar Empleado";
+        getEmp() {
+            let me = this;
+            var url = "/api/employee/getemployee";
+            axios.get(url, function (response) {
+                var answer = response.data;
+                me.arrayEmp = answer.emp ;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+
+        openPay() {
+            this.title = "Registrar Pago";
             this.tpAction = 1;
             this.button = false;
             this.edo = true;
             this.clean();
         },
         
-        regEmp() {
+        regPay() {
             let me = this;
-            var url = "/api/employee/register";
+            var url = "/api/payment/register";
 
             axios
             .post(url, {
-                idEmp: this.idEmp,
-                name: this.name,
-                phone: this.phone,
-                address: this.address,
-                datAdmission: this.date,
+                idEmp: this.idEmployee,
+                value: this.value,
+                date: this.date,   
                 edo: this.edo
             })
             .then(function (response) {
                 me.listData();
                 Swal.fire(
-                    '¡Empleado nuevo!',
-                    'El empleado fue registrado con éxito',
+                    '¡Pago nuevo!',
+                    'El pago fue registrado con éxito',
                     'info'
                     )
                 me.close();
@@ -288,42 +283,38 @@ export default defineComponent({
             });
         },
 
-        visEmp() {
+        visPay() {
             Swal.fire(
-            'Empleado',
+            'Pago',
             )
         },
 
-        editEmp(data = []) {
-            this.title = "Actualizar Empleado"; 
+        editPay(data = []) {
+            this.title = "Actualizar Pago"; 
             this.tpAction = 1;
             this.id = data["id"];
-            this.idEmp = data["idEmployee"];
-            this.name = data["namEmployee"];
-            this.phone = data["phone"];
-            this.address = data["address"];
-            this.date = data["datAdmission"];
+            this.idEmployee = data["idEmp"];
+            this.value = data["payValue"];
+            this.date = data["payDate"];
             this.edo = data["edo"];
         },
 
-        updEmp() {
+        updPay() {
             let me = this;
-            var url = "/api/employee/update";
+            var url = "/api/payment/update";
             axios
             .put(url, {
                 id: this.id,
-                idEmp: this.idEmp,
-                name: this.name,
-                phone: this.phone,
-                address: this.address,
-                datAdmission: this.date,
+                idEmp: this.idEmployee,                
+                value: this.value,
+                date: this.date,
                 edo: this.edo
             })
             .then(function (response) {
                 me.listData();
                 Swal.fire(
                     '¡Registro actualizado!',
-                    'El empleado fue actualizado correctamente',
+                    'El pago fue actualizado correctamente',
                     'info'
                     )
                 me.close();
@@ -333,15 +324,15 @@ export default defineComponent({
             });
         },
 
-        delEmp(data = []) {
+        delPay(data = []) {
             this.tpAction = 2;
             this.id = data["id"];
-            this.nameEmp = data["namEmployee"];
+            this.nameCustom = data["name"];
         },
 
-        destroyEmp() {
+        destroyPay() {
             let me = this;
-            var url = "/api/employee/delete";
+            var url = "/api/payment/delete";
 
             axios
             .post(url, {
@@ -351,7 +342,7 @@ export default defineComponent({
                 me.listData();
                 Swal.fire(
                     '¡Registro eliminado!',
-                    'El empleado fue eliminado con éxito',
+                    'El pago fue eliminado correctamente',
                     'info'
                     )
                 me.close();
@@ -362,11 +353,9 @@ export default defineComponent({
         },
 
         clean() {
-            this.idEmp = "";
-            this.name = "";
-            this.phone = "";
-            this.address = "";
-            this.date = "";
+            this.idEmployee = "";
+            this.value = "";
+            this.date = ""; 
             this.edo = "";
         },
 
@@ -377,6 +366,7 @@ export default defineComponent({
 
     mounted() {
         this.listData();
+        this.getEmp();
     },
 });
 </script>
@@ -394,8 +384,8 @@ export default defineComponent({
 		border-radius: 20px;
 	}
 
-	tr td:nth-child(n+7),
-	tr th:nth-child(n+7) {
+	tr td:nth-child(n+5),
+	tr th:nth-child(n+5) {
 		border-radius: 0 .625rem .625rem 0;
 	}
 

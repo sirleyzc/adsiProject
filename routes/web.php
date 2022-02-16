@@ -36,6 +36,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 // Employee Routes
 Route::middleware(['auth:sanctum', 'verified'])->get('/api/employee', [EmployeeController::class, 'index'])->name('employee');
 Route::middleware(['auth:sanctum', 'verified'])->get('/api/employee/data', [EmployeeController::class, 'indexData']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/api/employee/getemployee', [EmployeeController::class, 'getEmployee']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/api/employee/register', [EmployeeController::class, 'store']);
 Route::middleware(['auth:sanctum', 'verified'])->put('/api/employee/update', [EmployeeController::class, 'update']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/api/employee/delete', [EmployeeController::class, 'destroy']);
@@ -51,9 +52,15 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/api/customer/delete', [C
 Route::middleware(['auth:sanctum', 'verified'])->get('/api/payment', [PaymentController::class, 'index'])->name('payment');
 Route::middleware(['auth:sanctum', 'verified'])->get('/api/payment/data', [PaymentController::class, 'indexData']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/api/payment/register', [PaymentController::class, 'store']);
+Route::middleware(['auth:sanctum', 'verified'])->put('/api/payment/update', [PaymentController::class, 'update']);
+Route::middleware(['auth:sanctum', 'verified'])->post('/api/payment/delete', [PaymentController::class, 'destroy']);
 
 // Harvest Routes
+Route::middleware(['auth:sanctum', 'verified'])->get('/api/harvest', [HarvestController::class, 'index'])->name('harvest');
+Route::middleware(['auth:sanctum', 'verified'])->get('/api/harvest/data', [HarvestController::class, 'indexData']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/api/harvest/register', [HarvestController::class, 'store']);
+Route::middleware(['auth:sanctum', 'verified'])->put('/api/harvest/update', [HarvestController::class, 'update']);
+Route::middleware(['auth:sanctum', 'verified'])->post('/api/harvest/delete', [HarvestController::class, 'destroy']);
 
 // Order Routes
 Route::middleware(['auth:sanctum', 'verified'])->post('/api/order/register', [OrderController::class, 'store']);

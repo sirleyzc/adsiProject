@@ -36,4 +36,21 @@ class PaymentController extends Controller
             'Payment', ['emp' => $payment]
         );
     }
+
+    //Update
+    public function update(Request $request) {
+        $payment= Payment::findOrFail($request->id);
+        $payment->idEmp = $request->idEmp;
+        $payment->payValue = $request->value;
+        $payment->payDate = $request->date;
+        $payment->edo = $request->edo;
+
+        $payment->save();
+    }
+
+    //delete
+    public function destroy(Request $request) {
+        $payment = Payment::findOrFail($request->id);
+        $payment->delete();
+    }
 }

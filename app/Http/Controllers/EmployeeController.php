@@ -46,6 +46,7 @@ class EmployeeController extends Controller
         $employee->phone = $request->phone;
         $employee->address = $request->address;
         $employee->datAdmission = $request->datAdmission;
+        $employee->edo = $request->edo;
 
         $employee->save();
     }
@@ -54,6 +55,14 @@ class EmployeeController extends Controller
     public function destroy(Request $request) {
         $employee = Employee::findOrFail($request->id);
         $employee->delete();
+    }
+
+    //get data
+    public function getEmployee(Request $request){
+        
+        $employee= Employee::select('idEmployee','namEmployee')
+        ->where('edo',1)->get();
+        return ['emp'=>$employee];
     }
 
 }

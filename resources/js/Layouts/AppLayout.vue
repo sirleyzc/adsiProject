@@ -32,6 +32,9 @@
                                 <jet-nav-link :href="route('payment')" :active="route().current('payment')">
                                     Pagos
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('harvest')" :active="route().current('harvest')">
+                                    Recolección
+                                </jet-nav-link>
                             </div>
                         </div>
 
