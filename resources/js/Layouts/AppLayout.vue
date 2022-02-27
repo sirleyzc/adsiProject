@@ -42,7 +42,7 @@
                             <div class="ml-3 relative">
                                 <!-- Teams Dropdown -->
                                 <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
-                                    <template #trigger>
+                                    <!-- <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
                                                 {{ $page.props.user.current_team.name }}
@@ -52,33 +52,33 @@
                                                 </svg>
                                             </button>
                                         </span>
-                                    </template>
+                                    </template> -->
 
                                     <template #content>
                                         <div class="w-60">
                                             <!-- Team Management -->
                                             <template v-if="$page.props.jetstream.hasTeamFeatures">
-                                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                                <!-- <div class="block px-4 py-2 text-xs text-gray-400">
                                                     Manage Team
-                                                </div>
+                                                </div> -->
 
                                                 <!-- Team Settings -->
-                                                <jet-dropdown-link :href="route('teams.show', $page.props.user.current_team)">
+                                                <!-- <jet-dropdown-link :href="route('teams.show', $page.props.user.current_team)">
                                                     Team Settings
-                                                </jet-dropdown-link>
+                                                </jet-dropdown-link> -->
 
-                                                <jet-dropdown-link :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
+                                               <!--  <jet-dropdown-link :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
                                                     Create New Team
-                                                </jet-dropdown-link>
+                                                </jet-dropdown-link> -->
 
                                                 <div class="border-t border-gray-100"></div>
 
                                                 <!-- Team Switcher -->
-                                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                                <!-- <div class="block px-4 py-2 text-xs text-gray-400">
                                                     Switch Teams
-                                                </div>
+                                                </div> -->
 
-                                                <template v-for="team in $page.props.user.all_teams" :key="team.id">
+                                                <!-- <template v-for="team in $page.props.user.all_teams" :key="team.id">
                                                     <form @submit.prevent="switchToTeam(team)">
                                                         <jet-dropdown-link as="button">
                                                             <div class="flex items-center">
@@ -87,7 +87,7 @@
                                                             </div>
                                                         </jet-dropdown-link>
                                                     </form>
-                                                </template>
+                                                </template> -->
                                             </template>
                                         </div>
                                     </template>
@@ -116,11 +116,11 @@
                                     <template #content>
                                         <!-- Account Management -->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Account
+                                            Opciones de la cuenta
                                         </div>
 
                                         <jet-dropdown-link :href="route('profile.show')">
-                                            Profile
+                                            Perfil
                                         </jet-dropdown-link>
 
                                         <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
@@ -132,7 +132,7 @@
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
                                             <jet-dropdown-link as="button">
-                                                Log Out
+                                                Cerrar Sesión
                                             </jet-dropdown-link>
                                         </form>
                                     </template>
@@ -156,7 +156,7 @@
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                            Inicio
                         </jet-responsive-nav-link>
                     </div>
 
@@ -175,45 +175,45 @@
 
                         <div class="mt-3 space-y-1">
                             <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                                Profile
+                                Perfil
                             </jet-responsive-nav-link>
 
-                            <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
+                            <!-- <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
                                 API Tokens
-                            </jet-responsive-nav-link>
+                            </jet-responsive-nav-link> -->
 
                             <!-- Authentication -->
                             <form method="POST" @submit.prevent="logout">
                                 <jet-responsive-nav-link as="button">
-                                    Log Out
+                                   Cerrar Sesión
                                 </jet-responsive-nav-link>
                             </form>
 
                             <!-- Team Management -->
                             <template v-if="$page.props.jetstream.hasTeamFeatures">
-                                <div class="border-t border-gray-200"></div>
+                                <!-- <div class="border-t border-gray-200"></div>
 
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     Manage Team
-                                </div>
+                                </div> -->
 
                                 <!-- Team Settings -->
-                                <jet-responsive-nav-link :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
+                                <!-- <jet-responsive-nav-link :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
                                     Team Settings
-                                </jet-responsive-nav-link>
+                                </jet-responsive-nav-link> -->
 
-                                <jet-responsive-nav-link :href="route('teams.create')" :active="route().current('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
+                              <!--   <jet-responsive-nav-link :href="route('teams.create')" :active="route().current('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
                                     Create New Team
-                                </jet-responsive-nav-link>
+                                </jet-responsive-nav-link> -->
 
                                 <div class="border-t border-gray-200"></div>
 
                                 <!-- Team Switcher -->
-                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                <!-- <div class="block px-4 py-2 text-xs text-gray-400">
                                     Switch Teams
-                                </div>
+                                </div> -->
 
-                                <template v-for="team in $page.props.user.all_teams" :key="team.id">
+                                <!-- <template v-for="team in $page.props.user.all_teams" :key="team.id">
                                     <form @submit.prevent="switchToTeam(team)">
                                         <jet-responsive-nav-link as="button">
                                             <div class="flex items-center">
@@ -222,7 +222,7 @@
                                             </div>
                                         </jet-responsive-nav-link>
                                     </form>
-                                </template>
+                                </template> -->
                             </template>
                         </div>
                     </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\HarvestController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TimeHarvestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,8 +60,11 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/api/payment/delete', [Pa
 Route::middleware(['auth:sanctum', 'verified'])->get('/api/harvest', [HarvestController::class, 'index'])->name('harvest');
 Route::middleware(['auth:sanctum', 'verified'])->get('/api/harvest/data', [HarvestController::class, 'indexData']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/api/harvest/register', [HarvestController::class, 'store']);
+//Route::post('/api/harvest/register', [HarvestController::class, 'store']);
 Route::middleware(['auth:sanctum', 'verified'])->put('/api/harvest/update', [HarvestController::class, 'update']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/api/harvest/delete', [HarvestController::class, 'destroy']);
 
 // Order Routes
 Route::middleware(['auth:sanctum', 'verified'])->post('/api/order/register', [OrderController::class, 'store']);
+Route::post('/api/order/register', [OrderController::class, 'store']);
+

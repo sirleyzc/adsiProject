@@ -1,10 +1,5 @@
 <template>
     <app-layout title="Employee">
-        <!-- <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Empleado
-            </h2>
-        </template> -->
 
         <div v-if="tpAction == 0" class="py-8">
             <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
@@ -14,13 +9,12 @@
                     <input
                         type="text"
                         name="name"
-                        placeholder="Search..."
+                        placeholder="Buscar..."
                         class="
-                        w-1/3
-                        py-2
-                        border-b-2 border-blue-600
+                        w-1/3 py-2 bg-emerald-50 h-11 rounded-xl shadow-lg hover:bg-green-100 focus:bg-green-100
+                        border-b-2 border-emerald-600
                         outline-none
-                        focus:border-yellow-400
+                        focus:border-emerald-400
                         "
                     />
                     </div>
@@ -180,24 +174,24 @@
         </div>
         <div v-if="tpAction==2">
             <!-- component -->
-            <div class="flex flex-col space-y-4 min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-gray-900">
-            <div class="flex flex-col p-8 bg-gray-800 shadow-md hover:shodow-lg rounded-2xl">
+            <div class="flex flex-col space-y-4 min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-emerald-50">
+            <div class="flex flex-col p-8 bg-emerald-500 shadow-md hover:shodow-lg rounded-2xl">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-16 h-16 rounded-2xl p-3 border border-gray-800 text-blue-400 bg-gray-900" fill="none"
+                            class="w-16 h-16 rounded-2xl p-3 border border-emerald-500 text-cyan-400 bg-emerald-600" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         <div class="flex flex-col ml-3">
-                            <div class="font-medium leading-none text-gray-100">¿Deseas eliminar el empleado {{nameEmp}}?</div>
-                            <p class="text-sm text-gray-500 leading-none mt-1">Recuerda que este proceso no es reversible
+                            <div class="font-medium leading-none text-white">¿Deseas eliminar el empleado {{nameEmp}}?</div>
+                            <p class="text-sm text-white leading-none mt-1">Recuerda que este proceso no es reversible
                             </p>
                         </div>
                     </div>
-                    <button @click="destroyEmp" class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Si</button>
-                    <button @click="close" class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">No</button>
+                    <button @click="destroyEmp" class="flex-no-shrink bg-emerald-900 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-emerald-900 text-white rounded-full">Si</button>
+                    <button @click="close" class="flex-no-shrink bg-emerald-900 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-emerald-900 text-white rounded-full">No</button>
 
                 </div>
             </div>
@@ -206,11 +200,14 @@
     </app-layout>
 </template>
 
+
 <script>
+
 import { defineComponent } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import axios from "axios";
 import Swal from 'sweetalert2'
+import toastr from 'toastr'
 
 export default defineComponent({
     components: {
@@ -280,7 +277,7 @@ export default defineComponent({
                     '¡Empleado nuevo!',
                     'El empleado fue registrado con éxito',
                     'info'
-                    )
+                    ) 
                 me.close();
             })
             .catch(function (error) {

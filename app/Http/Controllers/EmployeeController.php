@@ -60,9 +60,13 @@ class EmployeeController extends Controller
     //get data
     public function getEmployee(Request $request){
         
-        $employee= Employee::select('idEmployee','namEmployee')
+        $employee= Employee::select('id','namEmployee')
         ->where('edo',1)->get();
-        return ['emp'=>$employee];
+        return [
+            'emp'=>$employee
+        ];
     }
 
 }
+
+

@@ -21,9 +21,10 @@ class HarvestController extends Controller
             //Store the master
             $harvest = new Harvest();
             $harvest->idEmp = $request->idEmp;
-            $harvest->idUser = $request->idUser;
+            $harvest->idUser = 1;
             $harvest->datHarvest = $date;
-            $harvest->dayValue = $request->value;
+            $harvest->dayValue = 0;
+            $harvest->edo = 1;
 
             $harvest->save();
 
@@ -32,9 +33,10 @@ class HarvestController extends Controller
             foreach ($details as $ep => $det) {
                 $detail = new DetHarvest();
                 $detail->idHarvest = $harvest->id;
-                $detail->timHarvest = $det['timHar'];
+                $detail->timHarv = $det['timHarv'];
                 $detail->kilos = $det['kilos'];
                 $detail->timValue = $det['timVal'];
+             
                 
                 $detail->save();
             }
@@ -53,18 +55,62 @@ class HarvestController extends Controller
         );
     }
 
+    //IndexData
+    public function indexData() {
+        $harvest = Harvest::all();
+        return [
+            'harv'=>$harvest
+        ];
+    }
+
+    //Update
     public function update(Request $request){
+        try {
+        DB::beginTransaction();
+        $date = carbon::now('America/Bogota');
         $harvest= Harvest:: findOrFail($request->id);
         $harvest->idEmp = $request->idEmp;
         $harvest->idUser = $request->idUser;
-        $harvest->datHarvest = $request->date;
+        $harvest->datHarvest = $date;
         $harvest->datValue = $request->value;
 
         $harvest->save();
+
+        $details = $request->data;
+            foreach ($details as $ep => $det) {
+                $detail = DetHarvest::findOrFail($request->id);
+                $detail->timHarv = $det['timHarv'];
+                $detail->kilos = $det['kilos'];
+                $detail->timValue = $det['timVal'];
+             
+                
+                $detail->save();
+            }
+            DB::commit();
+        }catch (Exception $e) {
+            DB:rollback();
+            console.log($e);
+        }
     }
 
+    //Delete
     public function destroy(Request $request){
-        $harvest= Harvest:: findOrFail($request->id);
-        $harvest-> delete();
+        try {
+            DB::beginTransaction();
+            $date = carbon::now('America/Bogota');
+            $harvest= Harvest:: findOrFail($request->id);
+    
+            $harvest->delete();
+    
+            $details = $request->data;
+                foreach ($details as $ep => $det) {
+                    $detail = DetHarvest::findOrFail($request->id);
+                    $detail->delete();
+                }
+                DB::commit();
+            }catch (Exception $e) {
+                DB:rollback();
+                console.log($e);
+            }
     }
 }

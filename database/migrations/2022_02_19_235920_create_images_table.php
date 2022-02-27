@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDetHarvestsTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateDetHarvestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('det_harvests', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('idHarvest')->constrained('harvests');
-            $table->string('timHarv');
-            $table->integer('kilos');
-            $table->decimal('timValue', 10, 2);
+        Schema::create('images', function (Blueprint $table) {
+            $table->string('path');
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateDetHarvestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('det_harvests');
+        Schema::dropIfExists('images');
     }
 }

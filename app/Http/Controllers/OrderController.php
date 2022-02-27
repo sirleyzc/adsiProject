@@ -22,6 +22,7 @@ class OrderController extends Controller
             $order->idCustomer = $request->idCustomer;
             $order->orDate = $date;
             $order->totOrder = $request->total;
+            $order->edo = $request->edo;
 
             $order->save();
 

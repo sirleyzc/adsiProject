@@ -21,9 +21,7 @@ class PaymentController extends Controller
 
     //Read
     public function indexData() {
-        $payment = Payment::join('employees','payments.idEmp','=','employees.id')
-        ->select('employees.namEmployee as emp','payments.payValue', 'payments.payDate')
-        ->get();
+        $payment = Payment::all();
         return [
             'pay' => $payment
         ];
@@ -33,7 +31,7 @@ class PaymentController extends Controller
      public function index() {
         $payment = Payment::all();
         return Inertia::render(
-            'Payment', ['emp' => $payment]
+            'Payment', ['pay' => $payment]
         );
     }
 
